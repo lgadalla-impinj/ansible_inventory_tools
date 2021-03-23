@@ -9,4 +9,4 @@ Tools and scripts to help discover inventory for Ansible
 - sysman.yml: Playbook to install sysman user with passwordless-sudo access on a host
 - production.vmware.yml: Configuration file for [VMware Guest dynamic inventory](https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_vm_inventory_inventory.html) for the [Production vSphere cluster](https://wesxitvc02.impinj.com/ui/)
 - README.md: This file
-- scan_sshd.sh: Bash script to scan a set of pre-configured CIDR blocks for hosts that are listening on TCP port 22 (SSH)
+- scan_sshd.sh: Bash script to use [nmap](https://nmap.org/) to scan a set of pre-configured CIDR blocks for hosts that are listening on TCP port 22 (SSH)
