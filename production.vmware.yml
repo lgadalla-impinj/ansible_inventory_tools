@@ -1,0 +1,14 @@
+---
+plugin: vmware_vm_inventory
+strict: false
+hostname: wesxitvc02.impinj.com
+validate_certs: false
+with_tags: true
+hostnames:
+  - config.name
+  - config.guestId
+  - ansible_host
+filters:
+  - summary.runtime.powerState == "poweredOn"
+  - config.guestId is not match('windows')
+  - config.name is not match('vCLS')

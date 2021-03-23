@@ -1,0 +1,49 @@
+---
+- name: Install sysman account
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Read sysman password
+      set_fact:
+        sysman_pw: "{{ lookup('hashi_vault', 'secret/di/passwords/sysman:password') }}"
+      delegate_to: localhost
+      no_log: true
+
+    - name: Setup crypted sysman password
+      set_fact:
+        sysman_crypted: "{{ sysman_pw | password_hash('sha512', '96a30d662132') }}"
+      delegate_to: localhost
+      no_log: true
+
+    - name: Setup sysman account
+      user: 
+        name: sysman
+        comment: 'System Manager'
+        password: "{{ sysman_crypted }}"
+        shell: /bin/bash
+        groups: sudo
+        append: yes
+      when: ansible_os_family == "Debian"
+      no_log: true
+
+    - name: Setup sysman account
+      user: 
+        name: sysman
+        comment: 'System Manager'
+        password: "{{ sysman_crypted }}"
+        shell: /bin/bash
+        groups: wheel
+        append: yes
+      when: ansible_os_family == "Red Hat"
+      no_log: true
+
+    - name: Add sysman to sudoers
+      lineinfile:
+        path: /etc/sudoers.d/sysman
+        line: "sysman ALL=(ALL) NOPASSWD: ALL"
+        owner: root
+        group: root
+        mode: 0600
+        create: true
+        backup: true
