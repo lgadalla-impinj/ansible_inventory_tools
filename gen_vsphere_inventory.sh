@@ -1,4 +1,5 @@
 #!/bin/bash -e
+# Convert inventory IP addresses into DNS hostnames
 
 if [ "$#" -ne 1 ]; then
     >&2 echo "$(basename ${0}): Usage: $(basename ${0}) <inventory file>"

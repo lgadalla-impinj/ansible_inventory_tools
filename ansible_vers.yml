@@ -1,0 +1,9 @@
+---
+- name: Get VM list
+  hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Print hostname and OS version
+      debug:
+        msg: "{{ ansible_hostname }}: {{ ansible_distribution }} {{ ansible_distribution_version }}"

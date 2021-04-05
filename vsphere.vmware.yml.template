@@ -1,0 +1,63 @@
+---
+plugin: vmware_vm_inventory
+strict: false
+hostname: $VMWARE_HOST
+username: $VMWARE_USER
+password: $VMWARE_PASSWORD
+validate_certs: false
+with_tags: true
+hostnames:
+  - config.name
+  - config.guestId
+  - ansible_host
+filters:
+  - summary.runtime.powerState == "poweredOn"
+  - config.guestId != "dosGuest"
+  - config.guestId != "eComStation2Guest"
+  - config.guestId != "eComStationGuest"
+  - config.guestId != "netware4Guest"
+  - config.guestId != "netware5Guest"
+  - config.guestId != "netware6Guest"
+  - config.guestId != "nid9Guest"
+  - config.guestId != "oesGuest"
+  - config.guestId != "os2Guest"
+  - config.guestId != "otherGuest"
+  - config.guestId != "sjdsGuest"
+  - config.guestId != "vmkernel5Guest"
+  - config.guestId != "vmkernel65Guest"
+  - config.guestId != "vmkernel6Guest"
+  - config.guestId != "vmkernelGuest"
+  - config.guestId != "vmwarePhoton64Guest"
+  - config.guestId != "win2000AdvServGuest"
+  - config.guestId != "win2000ProGuest"
+  - config.guestId != "win2000ServGuest"
+  - config.guestId != "win31Guest"
+  - config.guestId != "win95Guest"
+  - config.guestId != "win98Guest"
+  - config.guestId != "windows7_64Guest"
+  - config.guestId != "windows7Guest"
+  - config.guestId != "windows7Server64Guest"
+  - config.guestId != "windows8_64Guest"
+  - config.guestId != "windows8Guest"
+  - config.guestId != "windows8Server64Guest"
+  - config.guestId != "windows9_64Guest"
+  - config.guestId != "windows9Guest"
+  - config.guestId != "windows9Server64Guest"
+  - config.guestId != "windowsHyperVGuest"
+  - config.guestId != "winLonghorn64Guest"
+  - config.guestId != "winLonghornGuest"
+  - config.guestId != "winMeGuest"
+  - config.guestId != "winNetBusinessGuest"
+  - config.guestId != "winNetDatacenter64Guest"
+  - config.guestId != "winNetDatacenterGuest"
+  - config.guestId != "winNetEnterprise64Guest"
+  - config.guestId != "winNetEnterpriseGuest"
+  - config.guestId != "winNetStandard64Guest"
+  - config.guestId != "winNetStandardGuest"
+  - config.guestId != "winNetWebGuest"
+  - config.guestId != "winNTGuest"
+  - config.guestId != "winVista64Guest"
+  - config.guestId != "winVistaGuest"
+  - config.guestId != "winXPHomeGuest"
+  - config.guestId != "winXPPro64Guest"
+  - config.guestId != "winXPProGuest"

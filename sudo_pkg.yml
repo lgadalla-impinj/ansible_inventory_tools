@@ -1,0 +1,34 @@
+---
+- name: Get VM list
+  hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Print hostname and OS version
+      debug:
+        msg: "{{ ansible_hostname }}: {{ ansible_distribution }} {{ ansible_distribution_version }}"
+
+    - name: Get sudo version (RedHat)
+      command: 'yum list installed sudo'
+      register: r_yum
+      when: ansible_os_family == "RedHat"
+ 
+    - name: Print sudo version (RedHat)
+      debug:
+        var: r_yum.stdout
+      when: 
+        - ansible_os_family == "RedHat"
+        - r_yum.stdout is defined
+
+    - name: Get sudo version (Debian)
+      shell: "apt list sudo 2>/dev/null | grep 'installed'"
+      register: r_apt
+      when: ansible_os_family == "Debian"
+ 
+    - name: Print sudo version (Debian)
+      debug:
+        var: r_apt.stdout
+      when: 
+        - ansible_os_family == "Debian"
+        - r_apt.stdout is defined
+

@@ -1,0 +1,13 @@
+---
+- name: Get VM list
+  hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Obtain Sudo version
+      shell: "sudo --version | grep 'Sudo version' | sed 's/Sudo version //'"
+      register: r_sudo_version
+
+    - name: Print hostname and OS version
+      debug:
+        msg: "| {{ ansible_fqdn }} | {{ ansible_distribution }} | {{ ansible_distribution_version }} | {{ r_sudo_version.stdout }} |"
